@@ -19,7 +19,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     phone: '',
     serviceType: selectedServicePreset || 'Luxury Destination Wedding',
     eventDate: '',
-    budgetRange: '$5,000 - $8,000',
+    budgetRange: '₹1,50,000 - ₹2,50,000',
     location: '',
     message: ''
   });
@@ -52,7 +52,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#09090b] relative z-10 border-t border-zinc-900">
+    <section id="contact" className="py-24 bg-[#080303] relative z-10 border-t border-rose-950/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -60,50 +60,50 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           {/* Contact Details Left Column */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 text-xs font-semibold uppercase tracking-widest mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8b0101]/20 text-[#e7d9d1] border border-[#8b0101]/40 text-xs font-semibold uppercase tracking-widest mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-[#e7d9d1]" />
                 <span>Reserve Your Date</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-syne font-bold text-white tracking-tight mb-4">
                 LET'S CREATE <span className="gold-gradient-text">TOGETHER</span>
               </h2>
-              <p className="text-zinc-300 text-sm leading-relaxed">
+              <p className="text-[#e7d9d1]/80 text-sm leading-relaxed">
                 Currently accepting luxury wedding, commercial cinema, and fashion editorial commissions worldwide. Fill out the booking form to receive custom pricing proposal within 24 hours.
               </p>
             </div>
 
             {/* Direct Contact Cards */}
             <div className="space-y-4">
-              <div className="glass-panel p-4 rounded-2xl border border-zinc-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5" />
+              <div className="glass-panel p-4 rounded-2xl border border-rose-950/40 flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#8b0101]/30 text-[#e7d9d1] flex items-center justify-center shrink-0 border border-[#8b0101]/40">
+                  <Mail className="w-5 h-5 text-[#e7d9d1]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Direct Email</span>
-                  <a href={`mailto:${settings.email}`} className="text-white text-sm font-semibold hover:text-amber-400 block">
+                  <span className="text-[10px] text-[#e7d9d1]/60 uppercase font-bold tracking-wider">Direct Email</span>
+                  <a href={`mailto:${settings.email}`} className="text-white text-sm font-semibold hover:text-[#e7d9d1] block">
                     {settings.email}
                   </a>
                 </div>
               </div>
 
-              <div className="glass-panel p-4 rounded-2xl border border-zinc-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5" />
+              <div className="glass-panel p-4 rounded-2xl border border-rose-950/40 flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#8b0101]/30 text-[#e7d9d1] flex items-center justify-center shrink-0 border border-[#8b0101]/40">
+                  <Phone className="w-5 h-5 text-[#e7d9d1]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Studio Phone</span>
-                  <a href={`tel:${settings.phone}`} className="text-white text-sm font-semibold hover:text-amber-400 block">
+                  <span className="text-[10px] text-[#e7d9d1]/60 uppercase font-bold tracking-wider">Studio Phone</span>
+                  <a href={`tel:${settings.phone}`} className="text-white text-sm font-semibold hover:text-[#e7d9d1] block">
                     {settings.phone}
                   </a>
                 </div>
               </div>
 
-              <div className="glass-panel p-4 rounded-2xl border border-zinc-800 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
+              <div className="glass-panel p-4 rounded-2xl border border-rose-950/40 flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#8b0101]/30 text-[#e7d9d1] flex items-center justify-center shrink-0 border border-[#8b0101]/40">
+                  <MapPin className="w-5 h-5 text-[#e7d9d1]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">Studios & Locations</span>
+                  <span className="text-[10px] text-[#e7d9d1]/60 uppercase font-bold tracking-wider">Studios & Locations</span>
                   <span className="text-white text-sm font-semibold block">{settings.location}</span>
                 </div>
               </div>
@@ -113,16 +113,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Booking Inquiry Form Right Column */}
           <div className="lg:col-span-7">
-            <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-zinc-800 shadow-2xl">
+            <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-rose-950/40 shadow-2xl">
               
               {submitted ? (
                 <div className="text-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
                   <h3 className="font-syne font-bold text-2xl text-white">Inquiry Received!</h3>
-                  <p className="text-zinc-300 text-sm max-w-md mx-auto">
-                    Thank you for reaching out. Alexander Vance and our studio team will review your project details and respond via email within 24 hours.
+                  <p className="text-[#e7d9d1]/80 text-sm max-w-md mx-auto">
+                    Thank you for reaching out. Swaroop Naik and our studio team will review your project details and respond via email within 24 hours.
                   </p>
                   <button
                     onClick={() => {
@@ -133,12 +133,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         phone: '',
                         serviceType: 'Luxury Destination Wedding',
                         eventDate: '',
-                        budgetRange: '$5,000 - $8,000',
+                        budgetRange: '₹1,50,000 - ₹2,50,000',
                         location: '',
                         message: ''
                       });
                     }}
-                    className="px-6 py-2.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold uppercase tracking-wider"
+                    className="px-6 py-2.5 rounded-full bg-[#1c0c0c] hover:bg-[#2c0f0f] text-[#e7d9d1] text-xs font-bold uppercase tracking-wider border border-rose-950/40"
                   >
                     Submit Another Inquiry
                   </button>
@@ -149,53 +149,53 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Your Full Name *</label>
+                      <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Your Full Name *</label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Sophia De-Lille"
+                        placeholder="e.g. Rahul & Neha"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
+                        className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-[#8b0101]"
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Email Address *</label>
+                      <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Email Address *</label>
                       <input
                         type="email"
                         required
-                        placeholder="e.g. sophia@example.com"
+                        placeholder="e.g. rahul@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
+                        className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-[#8b0101]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Phone Number</label>
+                      <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Phone Number</label>
                       <input
                         type="tel"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
+                        className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-[#8b0101]"
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Service Required</label>
+                      <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Service Required</label>
                       <select
                         value={formData.serviceType}
                         onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-500"
+                        className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#8b0101]"
                       >
-                        <option value="Luxury Destination Wedding">Destination Wedding Photography & Film</option>
+                        <option value="Luxury Destination Wedding">Destination Wedding Photography & Cinema</option>
+                        <option value="1st Birthday Milestone Shoot">1st Birthday Milestone & Party Shoot</option>
                         <option value="Commercial Brand Film">Commercial & Brand Film</option>
-                        <option value="Portrait & Fashion Editorial">Editorial Portrait & Fashion</option>
-                        <option value="Drone Aerial Cinematography">Drone Aerial Cinematography</option>
+                        <option value="Pre-Wedding Cinematic Teaser">Pre-Wedding Cinematic Teaser</option>
                         <option value="Custom Project">Custom Project Commission</option>
                       </select>
                     </div>
@@ -203,55 +203,55 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Target Event Date</label>
+                      <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Target Event Date</label>
                       <input
                         type="date"
                         value={formData.eventDate}
                         onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-500"
+                        className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#8b0101]"
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Estimated Budget</label>
+                      <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Estimated Budget</label>
                       <select
                         value={formData.budgetRange}
                         onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-500"
+                        className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-[#8b0101]"
                       >
-                        <option value="$3,000 - $5,000">$3,000 - $5,000</option>
-                        <option value="$5,000 - $8,000">$5,000 - $8,000</option>
-                        <option value="$8,000 - $15,000">$8,000 - $15,000</option>
-                        <option value="$15,000+">$15,000+</option>
+                        <option value="₹35,000 - ₹50,000">₹35,000 - ₹50,000</option>
+                        <option value="₹65,000 - ₹1,000,00">₹65,000 - ₹1,00,000</option>
+                        <option value="₹1,50,000 - ₹2,50,000">₹1,50,000 - ₹2,50,000</option>
+                        <option value="₹2,50,000+">₹2,50,000+</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Event Location / City</label>
+                    <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Event Location / City</label>
                     <input
                       type="text"
-                      placeholder="e.g. Paris, Lake Como, New York, Bali..."
+                      placeholder="e.g. Mumbai, Pune, Goa, Udaipur, Dubai..."
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-[#8b0101]"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Project Details & Vision</label>
+                    <label className="text-xs text-[#e7d9d1]/70 uppercase font-semibold block mb-1">Project Details & Vision</label>
                     <textarea
                       rows={4}
                       placeholder="Tell us about your story, timeline, preferred aesthetic, or specific requirements..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#160a0a] border border-rose-950/40 rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-[#8b0101]"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-black gold-gradient-bg hover:brightness-110 shadow-xl shadow-amber-500/25 flex items-center justify-center gap-2"
+                    className="w-full py-4 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-xl shadow-[#8b0101]/30 flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
                     Send Booking Inquiry

@@ -42,8 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#09090b]/90 backdrop-blur-md border-b border-zinc-800/80 py-3 shadow-2xl shadow-black/50'
-          : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5'
+          ? 'bg-[#080303]/90 backdrop-blur-md border-b border-rose-950/40 py-3 shadow-2xl shadow-black/80'
+          : 'bg-gradient-to-b from-black/90 via-black/50 to-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img 
               src="/logo.png" 
               alt={settings.brandName} 
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_10px_rgba(251,191,36,0.2)]" 
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_12px_rgba(139,1,1,0.5)]" 
             />
           </a>
 
@@ -64,10 +64,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest text-zinc-300 hover:text-amber-400 transition-colors py-1 font-semibold relative group"
+                className="text-[11px] xl:text-xs uppercase tracking-wider xl:tracking-widest text-[#e7d9d1]/80 hover:text-[#e7d9d1] transition-colors py-1 font-semibold relative group"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-amber-500 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#8b0101] transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -78,12 +78,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={onOpenAdmin}
-                  className="relative px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-2 hover:bg-amber-500/30 transition-all"
+                  className="relative px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#8b0101]/20 text-[#e7d9d1] border border-[#8b0101]/40 flex items-center gap-2 hover:bg-[#8b0101]/30 transition-all"
                 >
-                  <ShieldCheck className="w-4 h-4 text-amber-400" />
+                  <ShieldCheck className="w-4 h-4 text-[#e7d9d1]" />
                   Admin Portal Active
                   {unreadInquiriesCount > 0 && (
-                    <span className="bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                    <span className="bg-[#8b0101] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                       {unreadInquiriesCount}
                     </span>
                   )}
@@ -98,17 +98,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <button
                 onClick={onOpenAdmin}
-                className="px-3.5 py-1.5 rounded-full text-xs font-medium text-zinc-300 bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/60 hover:text-white flex items-center gap-1.5 transition-all"
+                className="px-3.5 py-1.5 rounded-full text-xs font-medium text-[#e7d9d1]/90 bg-[#160a0a]/80 hover:bg-[#250d0d] border border-[#8b0101]/30 hover:border-[#8b0101]/60 hover:text-white flex items-center gap-1.5 transition-all"
                 title="Admin Dashboard Login"
               >
-                <Lock className="w-3.5 h-3.5 text-amber-400" />
+                <Lock className="w-3.5 h-3.5 text-[#e7d9d1]" />
                 Admin Dashboard
               </button>
             )}
 
             <a
               href="#contact"
-              className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-black gold-gradient-bg hover:brightness-110 transition-all transform hover:-translate-y-0.5 shadow-lg shadow-amber-500/20 flex items-center gap-1.5"
+              className="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#8b0101]/30 flex items-center gap-1.5"
             >
               Book Shoot
               <ArrowRight className="w-3.5 h-3.5" />
@@ -119,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={onOpenAdmin}
-              className="p-2 text-amber-400 hover:text-amber-300 focus:outline-none"
+              className="p-2 text-[#e7d9d1] hover:text-white focus:outline-none"
               title="Admin Login"
             >
               <Lock className="w-5 h-5" />
@@ -136,13 +136,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#09090b]/98 border-b border-zinc-800 px-4 pt-4 pb-6 space-y-3">
+        <div className="lg:hidden bg-[#080303]/98 border-b border-rose-950/40 px-4 pt-4 pb-6 space-y-3">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm uppercase tracking-wider text-zinc-200 hover:text-amber-400 py-2 border-b border-zinc-800/40"
+              className="block text-sm uppercase tracking-wider text-zinc-200 hover:text-[#e7d9d1] py-2 border-b border-rose-950/30"
             >
               {link.name}
             </a>
@@ -151,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider text-black gold-gradient-bg"
+              className="w-full text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider text-white crimson-gradient-bg"
             >
               Book A Shoot
             </a>
