@@ -53,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img 
               src="/logo.png" 
               alt={settings.brandName} 
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(139,1,1,0.25)]" 
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(139,1,1,0.2)]" 
             />
           </a>
 

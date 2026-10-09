@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Lock, Video, ArrowUp } from 'lucide-react';
+import { Lock, Video, ArrowUp } from 'lucide-react';
 import type { SiteSettings } from '../types';
 
 interface FooterProps {
@@ -21,14 +21,11 @@ export const Footer: React.FC<FooterProps> = ({ settings, onOpenAdmin }) => {
           {/* Brand Info */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#8b0101] p-[1px] shadow-md">
-                <div className="w-full h-full bg-[#180404] rounded-full flex items-center justify-center">
-                  <Camera className="w-4 h-4 text-[#e7d9d1]" />
-                </div>
-              </div>
-              <span className="font-syne font-extrabold text-xl text-white tracking-wider">
-                {settings.brandName}
-              </span>
+              <img 
+                src="/logo.png" 
+                alt={settings.brandName} 
+                className="h-10 sm:h-12 w-auto object-contain brightness-0 invert opacity-95" 
+              />
             </div>
             
             <p className="text-[#e7d9d1]/80 max-w-sm leading-relaxed font-normal">
