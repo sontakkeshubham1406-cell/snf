@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Sparkles, Aperture, ArrowDown, Camera } from 'lucide-react';
+import { Sparkles, Aperture, ArrowDown, Camera, CalendarCheck, Cpu, Award } from 'lucide-react';
 import type { SiteSettings } from '../types';
 
 interface HeroProps {
@@ -7,7 +7,7 @@ interface HeroProps {
   onOpenShowreel: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ settings, onOpenShowreel }) => {
+export const Hero: React.FC<HeroProps> = ({ settings }) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-grid-pattern film-grain">
       {/* Glow Effects */}
@@ -29,8 +29,8 @@ export const Hero: React.FC<HeroProps> = ({ settings, onOpenShowreel }) => {
 
         {/* Main Hero Title */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-syne font-extrabold text-[#2b0808] tracking-tight leading-tight max-w-4xl mx-auto mb-6 uppercase">
-          <span className="block sm:inline">SWAROOP NAIK</span>{' '}
-          <span className="gold-gradient-text block sm:inline">PHOTOGRAPHY</span>
+          <span className="block sm:inline">SWAROOPNAIK</span>{' '}
+          <span className="gold-gradient-text block sm:inline">FILMS</span>
         </h1>
 
         {/* Subtitle */}
@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onOpenShowreel }) => {
           {settings.heroSubheading}
         </p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons - Explore Portfolio & Book Now Pop-up */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <a
             href="#portfolio"
@@ -48,33 +48,35 @@ export const Hero: React.FC<HeroProps> = ({ settings, onOpenShowreel }) => {
             Explore Portfolio
           </a>
 
-          <button
-            onClick={onOpenShowreel}
+          <a
+            href="#contact"
             className="w-full sm:w-auto px-8 py-4 rounded-full font-syne font-bold text-sm uppercase tracking-wider text-[#2b0808] bg-white/90 hover:bg-white border border-[#8b0101]/30 hover:border-[#8b0101] transition-all flex items-center justify-center gap-3 shadow-md group"
           >
             <div className="w-7 h-7 rounded-full bg-[#8b0101]/10 flex items-center justify-center group-hover:bg-[#8b0101] transition-colors">
-              <Play className="w-3.5 h-3.5 text-[#8b0101] group-hover:text-white fill-current" />
+              <CalendarCheck className="w-3.5 h-3.5 text-[#8b0101] group-hover:text-white" />
             </div>
-            Watch 2026 Cinema Reel
-          </button>
+            Book Now Inquiry
+          </a>
         </div>
 
-        {/* Highlight Stats Banner */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-[#8b0101]/15">
+        {/* Highlight Stats Banner - Client updated stats: 100+ Weddings, Gears We Have, 100% Client Proofed */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto pt-6 border-t border-[#8b0101]/15">
           <div className="glass-panel p-4 rounded-2xl text-center shadow-sm">
-            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#8b0101]">150+</span>
-            <span className="text-xs text-[#4a2929] tracking-wider uppercase font-semibold">Luxury Weddings</span>
+            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#8b0101]">100+</span>
+            <span className="text-xs text-[#4a2929] tracking-wider uppercase font-semibold">Weddings Covered</span>
           </div>
-          <div className="glass-panel p-4 rounded-2xl text-center shadow-sm">
-            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#2b0808]">24+</span>
-            <span className="text-xs text-[#4a2929] tracking-wider uppercase font-semibold">International Awards</span>
-          </div>
-          <div className="glass-panel p-4 rounded-2xl text-center shadow-sm">
-            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#8b0101]">8K Cinema</span>
-            <span className="text-xs text-[#4a2929] tracking-wider uppercase font-semibold">RED & Sony Setup</span>
-          </div>
-          <div className="glass-panel p-4 rounded-2xl text-center shadow-sm">
-            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#2b0808]">100%</span>
+          <a href="#about" className="glass-panel p-4 rounded-2xl text-center shadow-sm hover:border-[#8b0101]/50 transition-colors block group">
+            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#2b0808] group-hover:text-[#8b0101] flex items-center justify-center gap-1">
+              <Cpu className="w-6 h-6 text-[#8b0101]" />
+              Pro Gears
+            </span>
+            <span className="text-xs text-[#4a2929] tracking-wider uppercase font-semibold">Gears We Have</span>
+          </a>
+          <div className="glass-panel p-4 rounded-2xl text-center shadow-sm col-span-2 md:col-span-1">
+            <span className="block font-syne font-bold text-2xl sm:text-3xl text-[#8b0101] flex items-center justify-center gap-1">
+              <Award className="w-6 h-6 text-[#8b0101]" />
+              100%
+            </span>
             <span className="text-xs text-[#4a2929] tracking-wider uppercase font-semibold">Client Proofed</span>
           </div>
         </div>

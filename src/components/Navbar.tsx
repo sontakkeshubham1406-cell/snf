@@ -31,10 +31,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Color Grading', href: '#color-grading' },
-    { name: 'Showreel', href: '#showreel' },
     { name: 'Services & Rates', href: '#services' },
     { name: 'Client Proofing', href: '#proofing' },
-    { name: 'Gear & Bio', href: '#about' },
+    { name: 'Gears & Bio', href: '#about' },
     { name: 'Contact', href: '#contact' }
   ];
 
@@ -49,13 +48,16 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo - Icon Only */}
-          <a href="#" className="flex items-center group">
+          {/* Logo & Brand Name */}
+          <a href="#" className="flex items-center gap-2.5 group">
             <img 
               src="/logo.png" 
               alt={settings.brandName} 
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(139,1,1,0.25)]" 
             />
+            <span className="font-syne font-extrabold text-lg sm:text-xl text-[#2b0808] tracking-tight group-hover:text-[#8b0101] transition-colors">
+              SWAROOPNAIKFILMS
+            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -90,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
                 <button
                   onClick={onLogoutAdmin}
-                  className="px-3 py-1.5 text-xs text-[#6b4b4b] hover:text-[#8b0101] transition-colors"
+                  className="px-3 py-1.5 text-xs text-[#6b4b4b] hover:text-[#8b0101] transition-colors font-semibold"
                 >
                   Exit Admin
                 </button>
@@ -142,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm uppercase tracking-wider text-[#2b0808] hover:text-[#8b0101] py-2 border-b border-[#8b0101]/10"
+              className="block text-sm uppercase tracking-wider text-[#2b0808] hover:text-[#8b0101] py-2 border-b border-[#8b0101]/10 font-bold"
             >
               {link.name}
             </a>

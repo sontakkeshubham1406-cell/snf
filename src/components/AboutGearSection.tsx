@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Cpu, Award, MapPin, Sparkles, ShieldCheck, Disc } from 'lucide-react';
+import { Camera, Cpu, Award, MapPin, Sparkles, ShieldCheck, Disc, Video } from 'lucide-react';
 import type { SiteSettings } from '../types';
 
 interface AboutGearSectionProps {
@@ -25,14 +25,14 @@ export const AboutGearSection: React.FC<AboutGearSectionProps> = ({ settings }) 
               
               <div className="absolute bottom-6 left-6 right-6">
                 <span className="text-[#e7d9d1] text-xs font-bold uppercase tracking-widest block mb-1">
-                  Lead Photographer & Director
+                  Lead Director & Photographer
                 </span>
                 <h3 className="font-syne font-extrabold text-2xl text-white">
-                  {settings.photographerName}
+                  Swaroopnaikfilms
                 </h3>
                 <p className="text-[#e7d9d1]/90 text-xs mt-1 flex items-center gap-1 font-medium">
                   <MapPin className="w-3.5 h-3.5 text-[#e7d9d1]" />
-                  {settings.location}
+                  Shriwardhan • Mumbai • Kokan • Worldwide
                 </p>
               </div>
             </div>
@@ -45,8 +45,8 @@ export const AboutGearSection: React.FC<AboutGearSectionProps> = ({ settings }) 
                 </div>
               </div>
               <div>
-                <span className="font-syne font-bold text-[#2b0808] text-sm block">12+ Years</span>
-                <span className="text-[#6b4b4b] text-[10px] uppercase font-mono font-bold">International Master</span>
+                <span className="font-syne font-bold text-[#2b0808] text-sm block">100+ Weddings</span>
+                <span className="text-[#6b4b4b] text-[10px] uppercase font-mono font-bold">Shriwardhan • Mumbai • Kokan</span>
               </div>
             </div>
           </div>
@@ -59,10 +59,10 @@ export const AboutGearSection: React.FC<AboutGearSectionProps> = ({ settings }) 
                 <span>The Vision Behind The Lens</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-syne font-bold text-[#2b0808] tracking-tight mb-4">
-                CRAFTING FINE ART <span className="gold-gradient-text">LEGACY</span>
+                SWAROOPNAIKFILMS <span className="gold-gradient-text">GEARS & VISION</span>
               </h2>
               <p className="text-[#4a2929] text-base leading-relaxed font-normal">
-                {settings.bioText}
+                Specializing in luxury wedding cinema, pre-wedding trailers, candid wedding stories, and birthday milestone films. Equipped with high-end Sony cinema cameras, prime glass, and professional lighting setup.
               </p>
             </div>
 
@@ -70,43 +70,53 @@ export const AboutGearSection: React.FC<AboutGearSectionProps> = ({ settings }) 
             <div className="space-y-4">
               <h3 className="font-syne font-bold text-lg text-[#2b0808] flex items-center gap-2">
                 <Cpu className="w-5 h-5 text-[#8b0101]" />
-                Cinema & Photography Arsenal
+                Gears We Have
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Cameras */}
-                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80">
+                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80 shadow-sm">
                   <span className="text-[#8b0101] text-xs font-bold uppercase tracking-wider block mb-2 font-mono flex items-center gap-1">
-                    <Camera className="w-3.5 h-3.5" /> Camera Bodies
+                    <Camera className="w-3.5 h-3.5" /> Cameras
                   </span>
-                  <ul className="space-y-1.5 text-xs text-[#2b0808] font-medium">
-                    {settings.gearList.cameras.map((c, i) => (
-                      <li key={i} className="line-clamp-1">• {c}</li>
-                    ))}
+                  <ul className="space-y-1 text-xs text-[#2b0808] font-semibold">
+                    <li>• Sony M4 (Alpha 7 IV)</li>
+                    <li>• Sony M5 (Alpha 7 V)</li>
+                    <li>• Sony Siii (Alpha 7S III)</li>
                   </ul>
                 </div>
 
                 {/* Lenses */}
-                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80">
+                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80 shadow-sm">
                   <span className="text-[#8b0101] text-xs font-bold uppercase tracking-wider block mb-2 font-mono flex items-center gap-1">
-                    <Disc className="w-3.5 h-3.5" /> Glass & Optics
+                    <Disc className="w-3.5 h-3.5" /> Lenses & Optics
                   </span>
-                  <ul className="space-y-1.5 text-xs text-[#2b0808] font-medium">
-                    {settings.gearList.lenses.map((l, i) => (
-                      <li key={i} className="line-clamp-1">• {l}</li>
-                    ))}
+                  <ul className="space-y-1 text-xs text-[#2b0808] font-semibold">
+                    <li>• Sigma DG-DN (16-28mm, 35mm, 85mm)</li>
+                    <li>• Samyang T1.9 Cine Lens (24mm, 35mm, 75mm)</li>
                   </ul>
                 </div>
 
-                {/* Drone & Lighting */}
-                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80">
+                {/* Drones */}
+                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80 shadow-sm">
                   <span className="text-[#8b0101] text-xs font-bold uppercase tracking-wider block mb-2 font-mono flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5" /> Drone & Lighting
+                    <Video className="w-3.5 h-3.5" /> Aerial Drones
                   </span>
-                  <ul className="space-y-1.5 text-xs text-[#2b0808] font-medium">
-                    {settings.gearList.lightingAndDrone.map((g, i) => (
-                      <li key={i} className="line-clamp-1">• {g}</li>
-                    ))}
+                  <ul className="space-y-1 text-xs text-[#2b0808] font-semibold">
+                    <li>• DJI Mavic 3 Pro</li>
+                    <li>• DJI Mavic 2 Pro</li>
+                  </ul>
+                </div>
+
+                {/* Lighting & Accessories */}
+                <div className="glass-panel p-4 rounded-2xl border border-[#8b0101]/15 bg-white/80 shadow-sm">
+                  <span className="text-[#8b0101] text-xs font-bold uppercase tracking-wider block mb-2 font-mono flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5" /> Accessories & Lighting
+                  </span>
+                  <ul className="space-y-1 text-xs text-[#2b0808] font-semibold">
+                    <li>• Ronin RS5 Gimbal</li>
+                    <li>• Godox LC500 & Nanlite RGB Lights</li>
+                    <li>• Viltrox 5-inch Monitor</li>
                   </ul>
                 </div>
               </div>

@@ -13,15 +13,15 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testim
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8b0101]/10 text-[#8b0101] border border-[#8b0101]/25 text-xs font-bold uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 text-[#8b0101] border border-[#8b0101]/25 text-xs font-bold uppercase tracking-widest mb-3 shadow-sm">
             <Quote className="w-3.5 h-3.5 text-[#8b0101]" />
-            <span>Client Endorsements</span>
+            <span>Google Verified Reviews</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-syne font-bold text-[#2b0808] tracking-tight mb-4">
             WORDS OF <span className="gold-gradient-text">APPRECIATION</span>
           </h2>
-          <p className="text-[#4a2929] text-sm sm:text-base font-normal">
-            Read stories and feedback from couples, fashion directors, and luxury brand leaders.
+          <p className="text-[#4a2929] text-sm sm:text-base font-medium flex items-center justify-center gap-2">
+            <span>⭐⭐⭐⭐⭐ 5.0 Star Rating on Google Reviews</span>
           </p>
         </div>
 
@@ -33,11 +33,16 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testim
               className="glass-panel p-8 rounded-3xl border border-[#8b0101]/15 flex flex-col justify-between hover:border-[#8b0101]/50 transition-all duration-300 shadow-sm hover:shadow-xl bg-white/80"
             >
               <div>
-                {/* Star Rating */}
-                <div className="flex items-center gap-1 text-[#8b0101] mb-6">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current text-[#8b0101]" />
-                  ))}
+                {/* Star Rating & Google Icon Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-1 text-[#8b0101]">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-current text-[#8b0101]" />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-bold text-[#8b0101] bg-[#8b0101]/10 px-2.5 py-0.5 rounded-full border border-[#8b0101]/20">
+                    Google Review
+                  </span>
                 </div>
 
                 {/* Quote Text */}
@@ -56,7 +61,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testim
                 <div>
                   <h4 className="font-syne font-bold text-[#2b0808] text-sm">{t.clientName}</h4>
                   <span className="text-[#6b4b4b] text-xs block font-medium">{t.role}</span>
-                  <span className="text-[#8b0101] text-[10px] uppercase font-mono tracking-wider font-extrabold">
+                  <span className="text-[#8b0101] text-[10px] uppercase font-mono tracking-wider font-extrabold block mt-0.5">
                     {t.projectTag}
                   </span>
                 </div>

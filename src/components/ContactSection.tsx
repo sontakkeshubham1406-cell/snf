@@ -17,9 +17,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     name: '',
     email: '',
     phone: '',
-    serviceType: selectedServicePreset || 'Luxury Destination Wedding',
+    serviceType: selectedServicePreset || 'Wedding One day service',
     eventDate: '',
-    budgetRange: '₹1,50,000 - ₹2,50,000',
+    budgetRange: '₹64,999/-',
     location: '',
     message: ''
   });
@@ -68,7 +68,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 LET'S CREATE <span className="gold-gradient-text">TOGETHER</span>
               </h2>
               <p className="text-[#4a2929] text-sm leading-relaxed font-normal">
-                Currently accepting luxury wedding, commercial cinema, and fashion editorial commissions worldwide. Fill out the booking form to receive custom pricing proposal within 24 hours.
+                Currently accepting wedding cinema, pre-wedding trailers, birthday milestone shoots, and commercial brand commissions. Fill out the booking form to receive custom pricing proposal within 24 hours.
               </p>
             </div>
 
@@ -79,7 +79,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <Mail className="w-5 h-5 text-[#8b0101]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#6b4b4b] uppercase font-bold tracking-wider">Direct Email</span>
+                  <span className="text-[10px] text-[#6b4b4b] uppercase font-bold tracking-wider">Direct Mail</span>
                   <a href={`mailto:${settings.email}`} className="text-[#2b0808] text-sm font-bold hover:text-[#8b0101] block">
                     {settings.email}
                   </a>
@@ -91,7 +91,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <Phone className="w-5 h-5 text-[#8b0101]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#6b4b4b] uppercase font-bold tracking-wider">Studio Phone</span>
+                  <span className="text-[10px] text-[#6b4b4b] uppercase font-bold tracking-wider">Mobile Number</span>
                   <a href={`tel:${settings.phone}`} className="text-[#2b0808] text-sm font-bold hover:text-[#8b0101] block">
                     {settings.phone}
                   </a>
@@ -122,7 +122,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
                   <h3 className="font-syne font-bold text-2xl text-[#2b0808]">Inquiry Received!</h3>
                   <p className="text-[#4a2929] text-sm max-w-md mx-auto font-medium">
-                    Thank you for reaching out. Swaroop Naik and our studio team will review your project details and respond via email within 24 hours.
+                    Thank you for reaching out. Swaroop Naik and Swaroopnaikfilms team will review your project details and respond via email/WhatsApp within 24 hours.
                   </p>
                   <button
                     onClick={() => {
@@ -131,9 +131,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         name: '',
                         email: '',
                         phone: '',
-                        serviceType: 'Luxury Destination Wedding',
+                        serviceType: 'Wedding One day service',
                         eventDate: '',
-                        budgetRange: '₹1,50,000 - ₹2,50,000',
+                        budgetRange: '₹64,999/-',
                         location: '',
                         message: ''
                       });
@@ -165,7 +165,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       <input
                         type="email"
                         required
-                        placeholder="e.g. rahul@example.com"
+                        placeholder="e.g. swaroopnaikfilms@gmail.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full bg-white border border-[#8b0101]/25 rounded-xl px-4 py-3 text-xs text-[#2b0808] placeholder-[#805959] focus:outline-none focus:border-[#8b0101] shadow-sm font-medium"
@@ -178,7 +178,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       <label className="text-xs text-[#4a2929] uppercase font-bold block mb-1">Phone Number</label>
                       <input
                         type="tel"
-                        placeholder="+91 98765 43210"
+                        placeholder="7038606182"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full bg-white border border-[#8b0101]/25 rounded-xl px-4 py-3 text-xs text-[#2b0808] placeholder-[#805959] focus:outline-none focus:border-[#8b0101] shadow-sm font-medium"
@@ -192,10 +192,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
                         className="w-full bg-white border border-[#8b0101]/25 rounded-xl px-4 py-3 text-xs text-[#2b0808] focus:outline-none focus:border-[#8b0101] shadow-sm font-medium"
                       >
-                        <option value="Luxury Destination Wedding">Destination Wedding Photography & Cinema</option>
-                        <option value="1st Birthday Milestone Shoot">1st Birthday Milestone & Party Shoot</option>
-                        <option value="Commercial Brand Film">Commercial & Brand Film</option>
-                        <option value="Pre-Wedding Cinematic Teaser">Pre-Wedding Cinematic Teaser</option>
+                        <option value="Wedding One day service">Wedding One day service (₹64,999/-)</option>
+                        <option value="Birthday Shoot - 3 to 4 hrs">Birthday Shoot - 3 to 4 hrs (₹12,999/-)</option>
+                        <option value="Pre Wedding One day service">Pre Wedding One day service (₹29,999/-)</option>
                         <option value="Custom Project">Custom Project Commission</option>
                       </select>
                     </div>
@@ -213,16 +212,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </div>
 
                     <div>
-                      <label className="text-xs text-[#4a2929] uppercase font-bold block mb-1">Estimated Budget</label>
+                      <label className="text-xs text-[#4a2929] uppercase font-bold block mb-1">Select Package Price</label>
                       <select
                         value={formData.budgetRange}
                         onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
                         className="w-full bg-white border border-[#8b0101]/25 rounded-xl px-4 py-3 text-xs text-[#2b0808] focus:outline-none focus:border-[#8b0101] shadow-sm font-medium"
                       >
-                        <option value="₹35,000 - ₹50,000">₹35,000 - ₹50,000</option>
-                        <option value="₹65,000 - ₹1,00,000">₹65,000 - ₹1,00,000</option>
-                        <option value="₹1,50,000 - ₹2,50,000">₹1,50,000 - ₹2,50,000</option>
-                        <option value="₹2,50,000+">₹2,50,000+</option>
+                        <option value="₹12,999/-">₹12,999/- (Birthday Shoot)</option>
+                        <option value="₹29,999/-">₹29,999/- (Pre Wedding)</option>
+                        <option value="₹64,999/-">₹64,999/- (Wedding One day)</option>
+                        <option value="Custom">Custom Budget</option>
                       </select>
                     </div>
                   </div>
@@ -231,7 +230,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <label className="text-xs text-[#4a2929] uppercase font-bold block mb-1">Event Location / City</label>
                     <input
                       type="text"
-                      placeholder="e.g. Mumbai, Pune, Goa, Udaipur, Dubai..."
+                      placeholder="e.g. Shriwardhan, Mumbai, Kokan, Goa..."
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                       className="w-full bg-white border border-[#8b0101]/25 rounded-xl px-4 py-3 text-xs text-[#2b0808] placeholder-[#805959] focus:outline-none focus:border-[#8b0101] shadow-sm font-medium"
