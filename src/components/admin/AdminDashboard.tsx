@@ -178,40 +178,36 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const newInquiriesCount = inquiries.filter((i) => i.status === 'new').length;
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#09090b] flex flex-col overflow-hidden text-zinc-100 font-sans">
+    <div className="fixed inset-0 z-50 bg-[#e7d9d1] flex flex-col overflow-hidden text-[#2b0808] font-sans">
       
       {/* Admin Top Header Bar */}
-      <header className="bg-zinc-955 border-b border-zinc-800 px-6 py-4 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full gold-gradient-bg p-[1px]">
-            <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
-              <Camera className="w-5 h-5 text-amber-400" />
-            </div>
-          </div>
+      <header className="bg-[#2b0808] border-b border-[#8b0101]/40 px-6 py-4 flex items-center justify-between shrink-0 shadow-md">
+        <div className="flex items-center gap-4">
+          <img src="/logo.png" alt={settings.brandName} className="h-9 w-auto object-contain brightness-0 invert opacity-95" />
           <div>
             <h1 className="font-syne font-bold text-lg text-white flex items-center gap-2">
               STUDIO ADMIN DASHBOARD
-              <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] uppercase font-mono tracking-wider">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#8b0101] text-white text-[10px] uppercase font-mono tracking-wider border border-[#8b0101]/50">
                 Live Admin Mode
               </span>
             </h1>
-            <p className="text-zinc-400 text-xs">{settings.brandName} • Photographer Content Suite</p>
+            <p className="text-[#e7d9d1]/70 text-xs">{settings.brandName} • Photographer Content Suite</p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <button
             onClick={onResetDefaults}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-900 hover:bg-zinc-800 text-zinc-400 border border-zinc-800 flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-[#180404] hover:bg-[#8b0101] text-[#e7d9d1] border border-[#8b0101]/40 flex items-center gap-1.5 transition-colors"
             title="Reset All Data to Initial Demo State"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3.5 h-3.5 text-[#8b0101]" />
             Reset Seed Data
           </button>
 
           <button
             onClick={onExitAdmin}
-            className="px-4 py-2 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-black gold-gradient-bg hover:brightness-110 shadow-lg shadow-amber-500/20"
+            className="px-4 py-2 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-lg shadow-[#8b0101]/30 transition-transform active:scale-98"
           >
             Exit Admin Portal
           </button>
@@ -222,8 +218,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       <div className="flex-1 flex overflow-hidden">
         
         {/* Sidebar Nav */}
-        <aside className="w-64 bg-zinc-950 border-r border-zinc-800 p-4 space-y-1 shrink-0 hidden md:block">
-          <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest px-3 py-2">
+        <aside className="w-64 bg-[#2b0808] border-r border-[#8b0101]/30 p-4 space-y-1.5 shrink-0 hidden md:block">
+          <div className="text-[10px] text-[#e7d9d1]/60 font-bold uppercase tracking-widest px-3 py-2">
             Navigation Menu
           </div>
 
@@ -231,8 +227,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             onClick={() => setActiveTab('overview')}
             className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'overview'
-                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                ? 'crimson-gradient-bg text-white shadow-md shadow-[#8b0101]/30'
+                : 'text-[#e7d9d1]/80 hover:text-white hover:bg-[#8b0101]/25'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -243,15 +239,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             onClick={() => setActiveTab('media')}
             className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'media'
-                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                ? 'crimson-gradient-bg text-white shadow-md shadow-[#8b0101]/30'
+                : 'text-[#e7d9d1]/80 hover:text-white hover:bg-[#8b0101]/25'
             }`}
           >
             <div className="flex items-center gap-3">
               <Camera className="w-4 h-4" />
               Media Gallery
             </div>
-            <span className="font-mono text-[10px] bg-black/30 px-2 py-0.5 rounded-full">
+            <span className="font-mono text-[10px] bg-[#180404] px-2 py-0.5 rounded-full text-[#e7d9d1]">
               {mediaItems.length}
             </span>
           </button>
@@ -260,8 +256,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             onClick={() => setActiveTab('inquiries')}
             className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'inquiries'
-                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                ? 'crimson-gradient-bg text-white shadow-md shadow-[#8b0101]/30'
+                : 'text-[#e7d9d1]/80 hover:text-white hover:bg-[#8b0101]/25'
             }`}
           >
             <div className="flex items-center gap-3">
@@ -269,7 +265,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               Client Inquiries
             </div>
             {newInquiriesCount > 0 && (
-              <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              <span className="bg-[#8b0101] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                 {newInquiriesCount}
               </span>
             )}
@@ -279,8 +275,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             onClick={() => setActiveTab('proofing')}
             className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'proofing'
-                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                ? 'crimson-gradient-bg text-white shadow-md shadow-[#8b0101]/30'
+                : 'text-[#e7d9d1]/80 hover:text-white hover:bg-[#8b0101]/25'
             }`}
           >
             <Lock className="w-4 h-4" />
@@ -291,8 +287,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             onClick={() => setActiveTab('services')}
             className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'services'
-                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                ? 'crimson-gradient-bg text-white shadow-md shadow-[#8b0101]/30'
+                : 'text-[#e7d9d1]/80 hover:text-white hover:bg-[#8b0101]/25'
             }`}
           >
             <SlidersHorizontal className="w-4 h-4" />
@@ -303,8 +299,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             onClick={() => setActiveTab('settings')}
             className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
               activeTab === 'settings'
-                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+                ? 'crimson-gradient-bg text-white shadow-md shadow-[#8b0101]/30'
+                : 'text-[#e7d9d1]/80 hover:text-white hover:bg-[#8b0101]/25'
             }`}
           >
             <Settings className="w-4 h-4" />
@@ -313,7 +309,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         </aside>
 
         {/* Tab Content Body */}
-        <main className="flex-1 overflow-y-auto p-6 bg-[#09090b]">
+        <main className="flex-1 overflow-y-auto p-6 bg-[#e7d9d1]">
           
           {/* TAB 1: OVERVIEW */}
           {activeTab === 'overview' && (
@@ -321,77 +317,77 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               
               {/* Stat Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div className="glass-panel p-5 rounded-2xl border border-zinc-800">
+                <div className="bg-[#dfcece]/60 backdrop-blur-md p-5 rounded-2xl border border-[#8b0101]/20 shadow-sm">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-zinc-400 text-xs uppercase font-semibold">Total Media Items</span>
-                    <Camera className="w-4 h-4 text-amber-400" />
+                    <span className="text-[#664444] text-xs uppercase font-semibold">Total Media Items</span>
+                    <Camera className="w-4 h-4 text-[#8b0101]" />
                   </div>
-                  <span className="text-3xl font-syne font-extrabold text-white">{mediaItems.length}</span>
-                  <span className="block text-[11px] text-zinc-500 mt-1 font-mono">{photoCount} Photos • {videoCount} Videos</span>
+                  <span className="text-3xl font-syne font-extrabold text-[#2b0808]">{mediaItems.length}</span>
+                  <span className="block text-[11px] text-[#664444] mt-1 font-mono">{photoCount} Photos • {videoCount} Videos</span>
                 </div>
 
-                <div className="glass-panel p-5 rounded-2xl border border-zinc-800">
+                <div className="bg-[#dfcece]/60 backdrop-blur-md p-5 rounded-2xl border border-[#8b0101]/20 shadow-sm">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-zinc-400 text-xs uppercase font-semibold">New Inquiries</span>
-                    <Mail className="w-4 h-4 text-amber-400" />
+                    <span className="text-[#664444] text-xs uppercase font-semibold">New Inquiries</span>
+                    <Mail className="w-4 h-4 text-[#8b0101]" />
                   </div>
-                  <span className="text-3xl font-syne font-extrabold text-amber-400">{newInquiriesCount}</span>
-                  <span className="block text-[11px] text-zinc-500 mt-1">{inquiries.length} Total Client Leads</span>
+                  <span className="text-3xl font-syne font-extrabold text-[#8b0101]">{newInquiriesCount}</span>
+                  <span className="block text-[11px] text-[#664444] mt-1">{inquiries.length} Total Client Leads</span>
                 </div>
 
-                <div className="glass-panel p-5 rounded-2xl border border-zinc-800">
+                <div className="bg-[#dfcece]/60 backdrop-blur-md p-5 rounded-2xl border border-[#8b0101]/20 shadow-sm">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-zinc-400 text-xs uppercase font-semibold">Active Proofing Galleries</span>
-                    <Lock className="w-4 h-4 text-amber-400" />
+                    <span className="text-[#664444] text-xs uppercase font-semibold">Active Proofing Galleries</span>
+                    <Lock className="w-4 h-4 text-[#8b0101]" />
                   </div>
-                  <span className="text-3xl font-syne font-extrabold text-white">{proofingAlbums.length}</span>
-                  <span className="block text-[11px] text-zinc-500 mt-1">Client Password Protected</span>
+                  <span className="text-3xl font-syne font-extrabold text-[#2b0808]">{proofingAlbums.length}</span>
+                  <span className="block text-[11px] text-[#664444] mt-1">Client Password Protected</span>
                 </div>
 
-                <div className="glass-panel p-5 rounded-2xl border border-zinc-800">
+                <div className="bg-[#dfcece]/60 backdrop-blur-md p-5 rounded-2xl border border-[#8b0101]/20 shadow-sm">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-zinc-400 text-xs uppercase font-semibold">System Health</span>
-                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    <span className="text-[#664444] text-xs uppercase font-semibold">System Health</span>
+                    <CheckCircle className="w-4 h-4 text-emerald-600" />
                   </div>
-                  <span className="text-2xl font-syne font-extrabold text-green-400">IndexedDB Ready</span>
-                  <span className="block text-[11px] text-zinc-500 mt-1">Instant Persistent Storage</span>
+                  <span className="text-xl font-syne font-extrabold text-emerald-700">IndexedDB Ready</span>
+                  <span className="block text-[11px] text-[#664444] mt-1">Instant Persistent Storage</span>
                 </div>
               </div>
 
               {/* Quick Action Box & Recent Inquiries */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-7 glass-panel p-6 rounded-3xl border border-zinc-800">
-                  <div className="flex items-center justify-between mb-6 border-b border-zinc-800 pb-4">
-                    <h3 className="font-syne font-bold text-lg text-white">Recent Client Inquiries</h3>
-                    <button onClick={() => setActiveTab('inquiries')} className="text-xs text-amber-400 hover:underline font-semibold">
+                <div className="lg:col-span-7 bg-[#dfcece]/60 backdrop-blur-md p-6 rounded-3xl border border-[#8b0101]/20 shadow-sm">
+                  <div className="flex items-center justify-between mb-6 border-b border-[#8b0101]/20 pb-4">
+                    <h3 className="font-syne font-bold text-lg text-[#2b0808]">Recent Client Inquiries</h3>
+                    <button onClick={() => setActiveTab('inquiries')} className="text-xs text-[#8b0101] hover:underline font-semibold">
                       View All ({inquiries.length})
                     </button>
                   </div>
 
                   <div className="space-y-3">
                     {inquiries.slice(0, 4).map((inq) => (
-                      <div key={inq.id} className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center justify-between">
+                      <div key={inq.id} className="p-4 bg-[#e7d9d1] rounded-2xl border border-[#8b0101]/15 flex items-center justify-between shadow-xs">
                         <div>
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="font-syne font-bold text-white text-sm">{inq.name}</span>
+                            <span className="font-syne font-bold text-[#2b0808] text-sm">{inq.name}</span>
                             <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                              inq.status === 'new' ? 'bg-red-500/20 text-red-400' : 'bg-zinc-800 text-zinc-400'
+                              inq.status === 'new' ? 'bg-[#8b0101] text-white' : 'bg-[#2b0808]/10 text-[#2b0808]'
                             }`}>
                               {inq.status}
                             </span>
                           </div>
-                          <p className="text-zinc-400 text-xs">{inq.serviceType} • {inq.budgetRange}</p>
+                          <p className="text-[#664444] text-xs">{inq.serviceType} • {inq.budgetRange}</p>
                         </div>
-                        <span className="text-[10px] text-zinc-500 font-mono">{inq.createdAt}</span>
+                        <span className="text-[10px] text-[#664444] font-mono">{inq.createdAt}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 glass-panel p-6 rounded-3xl border border-zinc-800 flex flex-col justify-between">
+                <div className="lg:col-span-5 bg-[#dfcece]/60 backdrop-blur-md p-6 rounded-3xl border border-[#8b0101]/20 shadow-sm flex flex-col justify-between">
                   <div>
-                    <h3 className="font-syne font-bold text-lg text-white mb-2">Quick Actions</h3>
-                    <p className="text-zinc-400 text-xs mb-6">Instantly upload photos, add video reels, or edit rates.</p>
+                    <h3 className="font-syne font-bold text-lg text-[#2b0808] mb-2">Quick Actions</h3>
+                    <p className="text-[#664444] text-xs mb-6">Instantly upload photos, add video reels, or edit rates.</p>
 
                     <div className="space-y-3">
                       <button
@@ -399,7 +395,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           setActiveTab('media');
                           setShowAddMediaModal(true);
                         }}
-                        className="w-full py-3 px-4 rounded-2xl bg-amber-500 text-black font-syne font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/20"
+                        className="w-full py-3 px-4 rounded-2xl crimson-gradient-bg text-white font-syne font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-110 transition-colors shadow-md shadow-[#8b0101]/25"
                       >
                         <Plus className="w-4 h-4" />
                         Upload Photo / Video
@@ -407,16 +403,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                       <button
                         onClick={() => setActiveTab('settings')}
-                        className="w-full py-3 px-4 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-syne font-bold text-xs uppercase tracking-wider border border-zinc-800 flex items-center justify-center gap-2"
+                        className="w-full py-3 px-4 rounded-2xl bg-[#2b0808] hover:bg-[#8b0101] text-white font-syne font-bold text-xs uppercase tracking-wider border border-[#8b0101]/30 flex items-center justify-center gap-2 transition-colors"
                       >
-                        <Settings className="w-4 h-4 text-amber-400" />
+                        <Settings className="w-4 h-4 text-[#e7d9d1]" />
                         Edit Site Settings
                       </button>
                     </div>
                   </div>
 
-                  <div className="pt-6 border-t border-zinc-800 mt-6 text-xs text-zinc-500">
-                    Client Demo PIN: <strong className="text-white font-mono">admin123</strong>
+                  <div className="pt-6 border-t border-[#8b0101]/20 mt-6 text-xs text-[#664444]">
+                    Client Demo PIN: <strong className="text-[#8b0101] font-mono font-bold">admin123</strong>
                   </div>
                 </div>
               </div>
@@ -428,15 +424,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {activeTab === 'media' && (
             <div className="space-y-6 max-w-6xl mx-auto">
               
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#8b0101]/20 pb-4">
                 <div>
-                  <h2 className="font-syne font-bold text-2xl text-white">Media Manager</h2>
-                  <p className="text-zinc-400 text-xs">Upload photos & videos, manage tags, EXIF gear info, and featured state.</p>
+                  <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Media Manager</h2>
+                  <p className="text-[#664444] text-xs">Upload photos & videos, manage tags, EXIF gear info, and featured state.</p>
                 </div>
 
                 <button
                   onClick={() => setShowAddMediaModal(true)}
-                  className="px-5 py-2.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-black gold-gradient-bg hover:brightness-110 shadow-lg shadow-amber-500/20 flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-md shadow-[#8b0101]/25 flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   Upload New Media
@@ -446,15 +442,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               {/* Media Items Table / Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {mediaItems.map((item) => (
-                  <div key={item.id} className="glass-panel rounded-2xl overflow-hidden border border-zinc-800 flex flex-col justify-between">
-                    <div className="relative aspect-video bg-black">
+                  <div key={item.id} className="bg-[#dfcece]/70 backdrop-blur-md rounded-2xl overflow-hidden border border-[#8b0101]/20 shadow-sm flex flex-col justify-between">
+                    <div className="relative aspect-video bg-[#2b0808]">
                       <img src={item.type === 'video' ? (item.thumbnailUrl || item.url) : item.url} alt={item.title} className="w-full h-full object-cover" />
                       
                       <div className="absolute top-3 left-3 flex items-center gap-2">
-                        <span className="px-2 py-0.5 rounded bg-black/80 text-[10px] uppercase font-bold text-amber-300">
+                        <span className="px-2 py-0.5 rounded bg-[#8b0101] text-[10px] uppercase font-bold text-white">
                           {item.type}
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-zinc-900 text-[10px] font-semibold text-zinc-300">
+                        <span className="px-2 py-0.5 rounded bg-[#2b0808]/90 text-[10px] font-semibold text-[#e7d9d1]">
                           {item.category}
                         </span>
                       </div>
@@ -462,7 +458,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <button
                         onClick={() => handleToggleFeatured(item.id)}
                         className={`absolute top-3 right-3 p-1.5 rounded-full text-xs transition-colors ${
-                          item.featured ? 'bg-amber-500 text-black font-bold' : 'bg-black/80 text-zinc-400'
+                          item.featured ? 'bg-[#8b0101] text-white font-bold' : 'bg-[#2b0808]/80 text-[#e7d9d1]'
                         }`}
                         title="Toggle Featured"
                       >
@@ -472,15 +468,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                     <div className="p-4 space-y-3">
                       <div>
-                        <h4 className="font-syne font-bold text-white text-base line-clamp-1">{item.title}</h4>
-                        <p className="text-zinc-400 text-xs line-clamp-1">{item.gearUsed || 'Sony Cinema'}</p>
+                        <h4 className="font-syne font-bold text-[#2b0808] text-base line-clamp-1">{item.title}</h4>
+                        <p className="text-[#664444] text-xs line-clamp-1">{item.gearUsed || 'Sony Cinema'}</p>
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
-                        <span className="text-[11px] text-zinc-500 font-mono">{item.createdAt}</span>
+                      <div className="flex items-center justify-between pt-3 border-t border-[#8b0101]/20">
+                        <span className="text-[11px] text-[#664444] font-mono">{item.createdAt}</span>
                         <button
                           onClick={() => handleDeleteMedia(item.id)}
-                          className="p-2 rounded-lg text-zinc-400 hover:text-red-400 hover:bg-zinc-800 transition-colors"
+                          className="p-2 rounded-lg text-[#8b0101] hover:bg-[#8b0101]/10 transition-colors"
                           title="Delete Media"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -497,25 +493,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {/* TAB 3: CLIENT INQUIRIES */}
           {activeTab === 'inquiries' && (
             <div className="space-y-6 max-w-6xl mx-auto">
-              <div className="border-b border-zinc-800 pb-4">
-                <h2 className="font-syne font-bold text-2xl text-white">Client Booking Inquiries</h2>
-                <p className="text-zinc-400 text-xs">Manage booking requests submitted through the portfolio contact form.</p>
+              <div className="border-b border-[#8b0101]/20 pb-4">
+                <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Client Booking Inquiries</h2>
+                <p className="text-[#664444] text-xs">Manage booking requests submitted through the portfolio contact form.</p>
               </div>
 
               <div className="space-y-4">
                 {inquiries.map((inq) => (
-                  <div key={inq.id} className="glass-panel p-6 rounded-2xl border border-zinc-800 space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
+                  <div key={inq.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm space-y-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#8b0101]/20 pb-3">
                       <div>
                         <div className="flex items-center gap-3">
-                          <h3 className="font-syne font-bold text-lg text-white">{inq.name}</h3>
+                          <h3 className="font-syne font-bold text-lg text-[#2b0808]">{inq.name}</h3>
                           <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
-                            inq.status === 'new' ? 'bg-red-500/20 text-red-400 border border-red-500/40' : 'bg-green-500/20 text-green-400'
+                            inq.status === 'new' ? 'bg-[#8b0101] text-white' : 'bg-[#2b0808]/10 text-[#2b0808]'
                           }`}>
                             {inq.status}
                           </span>
                         </div>
-                        <p className="text-zinc-400 text-xs mt-1">
+                        <p className="text-[#664444] text-xs mt-1">
                           {inq.email} • {inq.phone} • Submitted: {inq.createdAt}
                         </p>
                       </div>
@@ -524,7 +520,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         <select
                           value={inq.status}
                           onChange={(e) => handleChangeInquiryStatus(inq.id, e.target.value as any)}
-                          className="bg-zinc-900 border border-zinc-700 text-xs text-white rounded-lg px-3 py-1.5"
+                          className="bg-[#e7d9d1] border border-[#8b0101]/30 text-xs text-[#2b0808] rounded-lg px-3 py-1.5 font-medium"
                         >
                           <option value="new">Status: New</option>
                           <option value="read">Status: Read</option>
@@ -534,29 +530,29 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                         <button
                           onClick={() => handleDeleteInquiry(inq.id)}
-                          className="p-2 rounded-lg bg-zinc-900 hover:bg-red-500/20 text-zinc-400 hover:text-red-400"
+                          className="p-2 rounded-lg bg-[#e7d9d1] hover:bg-[#8b0101]/10 text-[#8b0101]"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-zinc-300">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-[#2b0808]">
                       <div>
-                        <span className="text-zinc-500 uppercase text-[10px] block font-bold">Service Required</span>
-                        <span className="font-semibold text-white">{inq.serviceType}</span>
+                        <span className="text-[#664444] uppercase text-[10px] block font-bold">Service Required</span>
+                        <span className="font-semibold text-[#2b0808]">{inq.serviceType}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 uppercase text-[10px] block font-bold">Target Date & Budget</span>
-                        <span className="font-semibold text-amber-400">{inq.eventDate || 'TBD'} ({inq.budgetRange})</span>
+                        <span className="text-[#664444] uppercase text-[10px] block font-bold">Target Date & Budget</span>
+                        <span className="font-bold text-[#8b0101]">{inq.eventDate || 'TBD'} ({inq.budgetRange})</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 uppercase text-[10px] block font-bold">Location</span>
-                        <span className="font-semibold text-white">{inq.location || 'Not specified'}</span>
+                        <span className="text-[#664444] uppercase text-[10px] block font-bold">Location</span>
+                        <span className="font-semibold text-[#2b0808]">{inq.location || 'Not specified'}</span>
                       </div>
                     </div>
 
-                    <div className="bg-zinc-950 p-4 rounded-xl text-xs text-zinc-300 border border-zinc-900 leading-relaxed">
+                    <div className="bg-[#e7d9d1] p-4 rounded-xl text-xs text-[#2b0808] border border-[#8b0101]/15 leading-relaxed">
                       "{inq.message}"
                     </div>
                   </div>
@@ -568,29 +564,29 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {/* TAB 4: CLIENT PROOFING MANAGER */}
           {activeTab === 'proofing' && (
             <div className="space-y-6 max-w-6xl mx-auto">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+              <div className="flex items-center justify-between border-b border-[#8b0101]/20 pb-4">
                 <div>
-                  <h2 className="font-syne font-bold text-2xl text-white">Client Proofing Galleries</h2>
-                  <p className="text-zinc-400 text-xs">Create passcode-protected albums for private client delivery.</p>
+                  <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Client Proofing Galleries</h2>
+                  <p className="text-[#664444] text-xs">Create passcode-protected albums for private client delivery.</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {proofingAlbums.map((album) => (
-                  <div key={album.id} className="glass-panel p-6 rounded-2xl border border-zinc-800 space-y-4">
+                  <div key={album.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-syne font-bold text-lg text-white">{album.albumTitle}</h3>
-                        <p className="text-zinc-400 text-xs">Client: {album.clientName} • Passcode: <strong className="text-amber-400 font-mono">{album.passcode}</strong></p>
+                        <h3 className="font-syne font-bold text-lg text-[#2b0808]">{album.albumTitle}</h3>
+                        <p className="text-[#664444] text-xs">Client: {album.clientName} • Passcode: <strong className="text-[#8b0101] font-mono">{album.passcode}</strong></p>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-[10px] font-bold uppercase">
+                      <span className="px-3 py-1 rounded-full bg-[#8b0101] text-white text-[10px] font-bold uppercase">
                         {album.status}
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-zinc-400 pt-2 border-t border-zinc-800">
-                      <span>Total Photos: <strong className="text-white">{album.photosCount}</strong></span>
-                      <span>Client Selected: <strong className="text-amber-400 font-bold">{album.selectedCount}</strong></span>
+                    <div className="flex items-center justify-between text-xs text-[#664444] pt-2 border-t border-[#8b0101]/20">
+                      <span>Total Photos: <strong className="text-[#2b0808]">{album.photosCount}</strong></span>
+                      <span>Client Selected: <strong className="text-[#8b0101] font-bold">{album.selectedCount}</strong></span>
                     </div>
                   </div>
                 ))}
@@ -601,17 +597,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {/* TAB 5: SERVICES MANAGER */}
           {activeTab === 'services' && (
             <div className="space-y-6 max-w-6xl mx-auto">
-              <div className="border-b border-zinc-800 pb-4">
-                <h2 className="font-syne font-bold text-2xl text-white">Services & Package Rates</h2>
-                <p className="text-zinc-400 text-xs">Manage public pricing tiers and package deliverables.</p>
+              <div className="border-b border-[#8b0101]/20 pb-4">
+                <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Services & Package Rates</h2>
+                <p className="text-[#664444] text-xs">Manage public pricing tiers and package deliverables.</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {services.map((srv) => (
-                  <div key={srv.id} className="glass-panel p-6 rounded-2xl border border-zinc-800 space-y-4">
-                    <h3 className="font-syne font-bold text-lg text-white">{srv.title}</h3>
-                    <p className="text-amber-400 font-syne font-extrabold text-2xl">{srv.price} <span className="text-xs text-zinc-400">USD</span></p>
-                    <ul className="text-xs text-zinc-400 space-y-1">
+                  <div key={srv.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm space-y-4">
+                    <h3 className="font-syne font-bold text-lg text-[#2b0808]">{srv.title}</h3>
+                    <p className="text-[#8b0101] font-syne font-extrabold text-2xl">{srv.price}</p>
+                    <ul className="text-xs text-[#664444] space-y-1">
                       {srv.deliverables.slice(0, 4).map((d, i) => (
                         <li key={i}>• {d}</li>
                       ))}
@@ -624,79 +620,79 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
           {/* TAB 6: WEBSITE SETTINGS */}
           {activeTab === 'settings' && (
-            <form onSubmit={handleSaveSettings} className="space-y-6 max-w-4xl mx-auto glass-panel p-8 rounded-3xl border border-zinc-800">
-              <div className="border-b border-zinc-800 pb-4">
-                <h2 className="font-syne font-bold text-2xl text-white">Website & Photographer Settings</h2>
-                <p className="text-zinc-400 text-xs">Update studio branding, photographer bio, email, and social profiles.</p>
+            <form onSubmit={handleSaveSettings} className="space-y-6 max-w-4xl mx-auto bg-[#dfcece]/70 backdrop-blur-md p-8 rounded-3xl border border-[#8b0101]/20 shadow-sm">
+              <div className="border-b border-[#8b0101]/20 pb-4">
+                <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Website & Photographer Settings</h2>
+                <p className="text-[#664444] text-xs">Update studio branding, photographer bio, email, and social profiles.</p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Brand Name</label>
+                  <label className="text-xs text-[#664444] uppercase font-semibold block mb-1">Brand Name</label>
                   <input
                     type="text"
                     value={localSettings.brandName}
                     onChange={(e) => setLocalSettings({ ...localSettings, brandName: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-[#e7d9d1] border border-[#8b0101]/30 rounded-xl px-4 py-2.5 text-xs text-[#2b0808]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Photographer Name</label>
+                  <label className="text-xs text-[#664444] uppercase font-semibold block mb-1">Photographer Name</label>
                   <input
                     type="text"
                     value={localSettings.photographerName}
                     onChange={(e) => setLocalSettings({ ...localSettings, photographerName: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-[#e7d9d1] border border-[#8b0101]/30 rounded-xl px-4 py-2.5 text-xs text-[#2b0808]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Hero Heading Statement</label>
+                <label className="text-xs text-[#664444] uppercase font-semibold block mb-1">Hero Heading Statement</label>
                 <input
                   type="text"
                   value={localSettings.heroHeading}
                   onChange={(e) => setLocalSettings({ ...localSettings, heroHeading: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white font-syne font-bold"
+                  className="w-full bg-[#e7d9d1] border border-[#8b0101]/30 rounded-xl px-4 py-2.5 text-xs text-[#2b0808] font-syne font-bold"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Photographer Bio</label>
+                <label className="text-xs text-[#664444] uppercase font-semibold block mb-1">Photographer Bio</label>
                 <textarea
                   rows={3}
                   value={localSettings.bioText}
                   onChange={(e) => setLocalSettings({ ...localSettings, bioText: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white"
+                  className="w-full bg-[#e7d9d1] border border-[#8b0101]/30 rounded-xl px-4 py-2.5 text-xs text-[#2b0808]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Contact Email</label>
+                  <label className="text-xs text-[#664444] uppercase font-semibold block mb-1">Contact Email</label>
                   <input
                     type="email"
                     value={localSettings.email}
                     onChange={(e) => setLocalSettings({ ...localSettings, email: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-[#e7d9d1] border border-[#8b0101]/30 rounded-xl px-4 py-2.5 text-xs text-[#2b0808]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-zinc-400 uppercase font-semibold block mb-1">Contact Phone</label>
+                  <label className="text-xs text-[#664444] uppercase font-semibold block mb-1">Contact Phone</label>
                   <input
                     type="text"
                     value={localSettings.phone}
                     onChange={(e) => setLocalSettings({ ...localSettings, phone: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white"
+                    className="w-full bg-[#e7d9d1] border border-[#8b0101]/30 rounded-xl px-4 py-2.5 text-xs text-[#2b0808]"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="px-8 py-3 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-black gold-gradient-bg hover:brightness-110 shadow-lg shadow-amber-500/20 flex items-center gap-2"
+                className="px-8 py-3 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-md shadow-[#8b0101]/25 flex items-center gap-2"
               >
                 Save Website Settings
               </button>
@@ -709,24 +705,24 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
       {/* UPLOAD MEDIA MODAL */}
       {showAddMediaModal && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
-          <div className="relative w-full max-w-2xl bg-zinc-955 border border-zinc-800 rounded-3xl p-8 shadow-2xl my-8">
-            <button onClick={() => setShowAddMediaModal(false)} className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white rounded-full bg-zinc-900">
+        <div className="fixed inset-0 z-50 bg-[#2b0808]/80 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+          <div className="relative w-full max-w-2xl bg-[#2b0808] border border-[#8b0101]/40 rounded-3xl p-8 shadow-2xl my-8 text-[#e7d9d1]">
+            <button onClick={() => setShowAddMediaModal(false)} className="absolute top-4 right-4 p-2 text-[#e7d9d1]/70 hover:text-white rounded-full bg-[#180404] border border-[#8b0101]/40">
               <X className="w-5 h-5" />
             </button>
 
             <h3 className="font-syne font-bold text-2xl text-white mb-1">Upload New Media Work</h3>
-            <p className="text-zinc-400 text-xs mb-6">Select a local photo file or enter media URL to publish to your portfolio.</p>
+            <p className="text-[#e7d9d1]/70 text-xs mb-6">Select a local photo file or enter media URL to publish to your portfolio.</p>
 
             <form onSubmit={handleCreateMedia} className="space-y-4">
               
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-zinc-400 font-semibold uppercase block mb-1">Media Type</label>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Media Type</label>
                   <select
                     value={newMedia.type}
                     onChange={(e) => setNewMedia({ ...newMedia, type: e.target.value as MediaType })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2 text-xs text-white"
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white"
                   >
                     <option value="photo">Photo Stills</option>
                     <option value="video">Cinema Video MP4 / Embed</option>
@@ -734,11 +730,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 <div>
-                  <label className="text-xs text-zinc-400 font-semibold uppercase block mb-1">Category</label>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Category</label>
                   <select
                     value={newMedia.category}
                     onChange={(e) => setNewMedia({ ...newMedia, category: e.target.value as Category })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2 text-xs text-white"
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white"
                   >
                     <option value="Weddings">Weddings</option>
                     <option value="Birthday Shoots">Birthday Shoots</option>
@@ -750,38 +746,38 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </div>
 
               <div>
-                <label className="text-xs text-zinc-400 font-semibold uppercase block mb-1">Title *</label>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Venice Golden Hour Romance"
                   value={newMedia.title}
                   onChange={(e) => setNewMedia({ ...newMedia, title: e.target.value })}
-                  className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs text-white"
+                  className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#e7d9d1]/40"
                 />
               </div>
 
               {/* Upload Local File or URL Input */}
               <div className="space-y-2">
-                <label className="text-xs text-zinc-400 font-semibold uppercase block">Upload File or Image URL *</label>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block">Upload File or Image URL *</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="file"
                     accept="image/*,video/*"
                     onChange={(e) => handleFileUpload(e)}
-                    className="text-xs text-zinc-400 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-black hover:file:bg-amber-400"
+                    className="text-xs text-[#e7d9d1]/80 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#8b0101] file:text-white hover:file:brightness-110"
                   />
-                  <span className="text-xs text-zinc-500 uppercase font-mono">OR</span>
+                  <span className="text-xs text-[#e7d9d1]/50 uppercase font-mono">OR</span>
                   <input
                     type="text"
                     placeholder="Paste Direct Image/Video URL"
                     value={newMedia.url}
                     onChange={(e) => setNewMedia({ ...newMedia, url: e.target.value })}
-                    className="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2 text-xs text-white"
+                    className="flex-1 bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white placeholder-[#e7d9d1]/40"
                   />
                 </div>
                 {newMedia.url && (
-                  <div className="mt-2 h-32 rounded-xl overflow-hidden bg-black border border-zinc-800">
+                  <div className="mt-2 h-32 rounded-xl overflow-hidden bg-[#180404] border border-[#8b0101]/40">
                     <img src={newMedia.url} alt="Preview" className="w-full h-full object-cover" />
                   </div>
                 )}
@@ -789,31 +785,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-zinc-400 font-semibold uppercase block mb-1">Client Name</label>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Client Name</label>
                   <input
                     type="text"
                     placeholder="e.g. Vogue Italia"
                     value={newMedia.clientName}
                     onChange={(e) => setNewMedia({ ...newMedia, clientName: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2 text-xs text-white"
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white placeholder-[#e7d9d1]/40"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-zinc-400 font-semibold uppercase block mb-1">Camera Gear Used</label>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Camera Gear Used</label>
                   <input
                     type="text"
                     placeholder="e.g. Sony A1 • FE 85mm f/1.4"
                     value={newMedia.gearUsed}
                     onChange={(e) => setNewMedia({ ...newMedia, gearUsed: e.target.value })}
-                    className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2 text-xs text-white"
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white placeholder-[#e7d9d1]/40"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-black gold-gradient-bg hover:brightness-110 shadow-lg shadow-amber-500/20"
+                className="w-full py-3.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-lg shadow-[#8b0101]/30 transition-transform active:scale-98"
               >
                 Publish to Portfolio Website
               </button>
