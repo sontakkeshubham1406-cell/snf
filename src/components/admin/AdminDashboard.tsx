@@ -11,7 +11,10 @@ import {
   CheckCircle,
   Star,
   Layers,
-  RotateCcw
+  RotateCcw,
+  Edit3,
+  Upload,
+  Check
 } from 'lucide-react';
 
 import type {
@@ -47,6 +50,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   settings,
   onUpdateMedia,
   onUpdateInquiries,
+  onUpdateServices,
+  onUpdateProofing,
   onUpdateSettings,
   onExitAdmin,
   onResetDefaults
@@ -80,6 +85,234 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   // Settings local state
   const [localSettings, setLocalSettings] = useState<SiteSettings>(settings);
+
+  // Proofing Albums Modals & Form State
+  const [showAddAlbumModal, setShowAddAlbumModal] = useState(false);
+  const [newAlbum, setNewAlbum] = useState<Partial<ProofingAlbum>>({
+    albumTitle: '',
+    clientName: '',
+    eventDate: new Date().toISOString().split('T')[0],
+    passcode: `SWAROOP${Math.floor(1000 + Math.random() * 9000)}`,
+    coverUrl: '',
+    status: 'active'
+  });
+  const [activeAlbumPhotosModal, setActiveAlbumPhotosModal] = useState<ProofingAlbum | null>(null);
+  const [newAlbumPhotoUrl, setNewAlbumPhotoUrl] = useState('');
+  const [newAlbumPhotoTitle, setNewAlbumPhotoTitle] = useState('');
+
+  // Services Modals & Form State
+  const [showServiceModal, setShowServiceModal] = useState(false);
+  const [editingService, setEditingService] = useState<ServicePackage | null>(null);
+  const [serviceForm, setServiceForm] = useState<{
+    title: string;
+    subtitle: string;
+    category: 'photography' | 'videography' | 'hybrid';
+    price: string;
+    duration: string;
+    deliverablesText: string;
+    popular: boolean;
+  }>({
+    title: '',
+    subtitle: '',
+    category: 'photography',
+    price: '',
+    duration: 'Full Day',
+    deliverablesText: '',
+    popular: false
+  });
+
+  // Proofing Album Handlers
+  const handleCreateAlbum = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newAlbum.albumTitle || !newAlbum.clientName) {
+      alert('Please fill in Album Title and Client Name.');
+      return;
+    }
+    const created: ProofingAlbum = {
+      id: `album-${Date.now()}`,
+      albumTitle: newAlbum.albumTitle || 'Client Gallery',
+      clientName: newAlbum.clientName || 'Client',
+      eventDate: newAlbum.eventDate || new Date().toISOString().split('T')[0],
+      passcode: newAlbum.passcode || `SWAROOP${Math.floor(1000 + Math.random() * 9000)}`,
+      coverUrl: newAlbum.coverUrl || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80',
+      photosCount: 0,
+      selectedCount: 0,
+      status: (newAlbum.status as 'active' | 'archived') || 'active',
+      photos: []
+    };
+    const updated = [created, ...proofingAlbums];
+    onUpdateProofing(updated);
+    setShowAddAlbumModal(false);
+    setNewAlbum({
+      albumTitle: '',
+      clientName: '',
+      eventDate: new Date().toISOString().split('T')[0],
+      passcode: `SWAROOP${Math.floor(1000 + Math.random() * 9000)}`,
+      coverUrl: '',
+      status: 'active'
+    });
+    alert('Client proofing album created successfully!');
+  };
+
+  const handleDeleteAlbum = (id: string) => {
+    if (confirm('Are you sure you want to delete this client proofing album?')) {
+      const updated = proofingAlbums.filter((a) => a.id !== id);
+      onUpdateProofing(updated);
+    }
+  };
+
+  const handleAddPhotoToAlbum = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!activeAlbumPhotosModal || !newAlbumPhotoUrl) {
+      alert('Please upload a photo or provide photo URL.');
+      return;
+    }
+    const targetId = activeAlbumPhotosModal.id;
+    const updated = proofingAlbums.map((album) => {
+      if (album.id === targetId) {
+        const newPhotoItem = {
+          id: `p-${Date.now()}`,
+          url: newAlbumPhotoUrl,
+          title: newAlbumPhotoTitle || `Photo ${album.photos.length + 1}`,
+          isSelected: false
+        };
+        const updatedPhotos = [newPhotoItem, ...album.photos];
+        return {
+          ...album,
+          photos: updatedPhotos,
+          photosCount: updatedPhotos.length
+        };
+      }
+      return album;
+    });
+    onUpdateProofing(updated);
+    setNewAlbumPhotoUrl('');
+    setNewAlbumPhotoTitle('');
+    const updatedActive = updated.find((a) => a.id === targetId);
+    if (updatedActive) setActiveAlbumPhotosModal(updatedActive);
+  };
+
+  const handleDeletePhotoFromAlbum = (albumId: string, photoId: string) => {
+    const updated = proofingAlbums.map((album) => {
+      if (album.id === albumId) {
+        const updatedPhotos = album.photos.filter((p) => p.id !== photoId);
+        return {
+          ...album,
+          photos: updatedPhotos,
+          photosCount: updatedPhotos.length,
+          selectedCount: updatedPhotos.filter((p) => p.isSelected).length
+        };
+      }
+      return album;
+    });
+    onUpdateProofing(updated);
+    const updatedActive = updated.find((a) => a.id === albumId);
+    if (updatedActive) setActiveAlbumPhotosModal(updatedActive);
+  };
+
+  const handleAlbumCoverUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewAlbum((prev) => ({ ...prev, coverUrl: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAlbumPhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewAlbumPhotoUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Service Handlers
+  const handleOpenAddServiceModal = () => {
+    setEditingService(null);
+    setServiceForm({
+      title: '',
+      subtitle: '',
+      category: 'photography',
+      price: '',
+      duration: 'Full Day',
+      deliverablesText: '',
+      popular: false
+    });
+    setShowServiceModal(true);
+  };
+
+  const handleOpenEditServiceModal = (srv: ServicePackage) => {
+    setEditingService(srv);
+    setServiceForm({
+      title: srv.title,
+      subtitle: srv.subtitle || '',
+      category: srv.category || 'photography',
+      price: srv.price,
+      duration: srv.duration || 'Full Day',
+      deliverablesText: srv.deliverables ? srv.deliverables.join('\n') : '',
+      popular: srv.popular || false
+    });
+    setShowServiceModal(true);
+  };
+
+  const handleSaveService = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!serviceForm.title || !serviceForm.price) {
+      alert('Please fill in Package Title and Price.');
+      return;
+    }
+
+    const deliverablesList = serviceForm.deliverablesText
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0);
+
+    if (editingService) {
+      const updated = services.map((s) =>
+        s.id === editingService.id
+          ? {
+              ...s,
+              title: serviceForm.title,
+              subtitle: serviceForm.subtitle,
+              category: serviceForm.category,
+              price: serviceForm.price,
+              duration: serviceForm.duration,
+              deliverables: deliverablesList.length > 0 ? deliverablesList : s.deliverables,
+              popular: serviceForm.popular
+            }
+          : s
+      );
+      onUpdateServices(updated);
+      alert('Service package updated successfully!');
+    } else {
+      const newService: ServicePackage = {
+        id: `srv-${Date.now()}`,
+        title: serviceForm.title,
+        subtitle: serviceForm.subtitle || 'Custom Service Package',
+        category: serviceForm.category,
+        price: serviceForm.price,
+        duration: serviceForm.duration,
+        deliverables: deliverablesList.length > 0 ? deliverablesList : ['High-Res Edited Photos', 'Cinematic Teaser Film'],
+        popular: serviceForm.popular
+      };
+      onUpdateServices([...services, newService]);
+      alert('New service package created successfully!');
+    }
+    setShowServiceModal(false);
+  };
+
+  const handleDeleteService = (id: string) => {
+    if (confirm('Are you sure you want to delete this service package?')) {
+      const updated = services.filter((s) => s.id !== id);
+      onUpdateServices(updated);
+    }
+  };
 
   // Handle local image file upload preview
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, isThumbnail = false, isRaw = false) => {
@@ -564,29 +797,64 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {/* TAB 4: CLIENT PROOFING MANAGER */}
           {activeTab === 'proofing' && (
             <div className="space-y-6 max-w-6xl mx-auto">
-              <div className="flex items-center justify-between border-b border-[#8b0101]/20 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#8b0101]/20 pb-4">
                 <div>
                   <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Client Proofing Galleries</h2>
-                  <p className="text-[#664444] text-xs">Create passcode-protected albums for private client delivery.</p>
+                  <p className="text-[#664444] text-xs">Create passcode-protected albums and upload client delivery photos.</p>
                 </div>
+
+                <button
+                  onClick={() => setShowAddAlbumModal(true)}
+                  className="px-5 py-2.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-md shadow-[#8b0101]/25 flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Create New Album
+                </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {proofingAlbums.map((album) => (
-                  <div key={album.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="font-syne font-bold text-lg text-[#2b0808]">{album.albumTitle}</h3>
-                        <p className="text-[#664444] text-xs">Client: {album.clientName} • Passcode: <strong className="text-[#8b0101] font-mono">{album.passcode}</strong></p>
+                  <div key={album.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm flex flex-col justify-between space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-syne font-bold text-lg text-[#2b0808]">{album.albumTitle}</h3>
+                          <p className="text-[#664444] text-xs">Client: <strong className="text-[#2b0808]">{album.clientName}</strong> • Event: {album.eventDate}</p>
+                        </div>
+                        <span className="px-3 py-1 rounded-full bg-[#8b0101] text-white text-[10px] font-bold uppercase">
+                          {album.status}
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-[#8b0101] text-white text-[10px] font-bold uppercase">
-                        {album.status}
-                      </span>
+
+                      <div className="p-3 bg-[#e7d9d1] rounded-xl border border-[#8b0101]/15 flex items-center justify-between text-xs">
+                        <span className="text-[#664444]">Client PIN:</span>
+                        <strong className="text-[#8b0101] font-mono tracking-widest text-sm">{album.passcode}</strong>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-[#664444] pt-2 border-t border-[#8b0101]/20">
-                      <span>Total Photos: <strong className="text-[#2b0808]">{album.photosCount}</strong></span>
-                      <span>Client Selected: <strong className="text-[#8b0101] font-bold">{album.selectedCount}</strong></span>
+                    <div className="space-y-3 pt-3 border-t border-[#8b0101]/20">
+                      <div className="flex items-center justify-between text-xs text-[#664444]">
+                        <span>Total Photos: <strong className="text-[#2b0808]">{album.photosCount}</strong></span>
+                        <span>Client Selected: <strong className="text-[#8b0101] font-bold">{album.selectedCount}</strong></span>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-2">
+                        <button
+                          onClick={() => setActiveAlbumPhotosModal(album)}
+                          className="flex-1 py-2 px-3 rounded-xl bg-[#2b0808] hover:bg-[#8b0101] text-white font-syne font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors"
+                        >
+                          <Upload className="w-3.5 h-3.5 text-[#e7d9d1]" />
+                          Upload & Manage Photos ({album.photosCount})
+                        </button>
+
+                        <button
+                          onClick={() => handleDeleteAlbum(album.id)}
+                          className="p-2 rounded-xl bg-[#e7d9d1] hover:bg-[#8b0101]/10 text-[#8b0101]"
+                          title="Delete Album"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -597,21 +865,74 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           {/* TAB 5: SERVICES MANAGER */}
           {activeTab === 'services' && (
             <div className="space-y-6 max-w-6xl mx-auto">
-              <div className="border-b border-[#8b0101]/20 pb-4">
-                <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Services & Package Rates</h2>
-                <p className="text-[#664444] text-xs">Manage public pricing tiers and package deliverables.</p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#8b0101]/20 pb-4">
+                <div>
+                  <h2 className="font-syne font-bold text-2xl text-[#2b0808]">Services & Package Rates</h2>
+                  <p className="text-[#664444] text-xs">Add new pricing tiers, edit rates, and customize package deliverables anytime.</p>
+                </div>
+
+                <button
+                  onClick={handleOpenAddServiceModal}
+                  className="px-5 py-2.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-md shadow-[#8b0101]/25 flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add New Package
+                </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {services.map((srv) => (
-                  <div key={srv.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm space-y-4">
-                    <h3 className="font-syne font-bold text-lg text-[#2b0808]">{srv.title}</h3>
-                    <p className="text-[#8b0101] font-syne font-extrabold text-2xl">{srv.price}</p>
-                    <ul className="text-xs text-[#664444] space-y-1">
-                      {srv.deliverables.slice(0, 4).map((d, i) => (
-                        <li key={i}>• {d}</li>
-                      ))}
-                    </ul>
+                  <div key={srv.id} className="bg-[#dfcece]/70 backdrop-blur-md p-6 rounded-2xl border border-[#8b0101]/20 shadow-sm flex flex-col justify-between space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="px-2.5 py-0.5 rounded-full bg-[#8b0101]/10 text-[#8b0101] text-[10px] uppercase font-bold border border-[#8b0101]/20">
+                          {srv.category}
+                        </span>
+                        {srv.popular && (
+                          <span className="px-2 py-0.5 rounded-full bg-[#8b0101] text-white text-[9px] font-extrabold uppercase tracking-wider">
+                            Popular
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 className="font-syne font-bold text-xl text-[#2b0808]">{srv.title}</h3>
+                      <p className="text-[#4a2929] text-xs font-medium">{srv.subtitle}</p>
+
+                      <div className="pt-2 border-t border-[#8b0101]/15">
+                        <span className="text-[#8b0101] font-syne font-extrabold text-2xl block">{srv.price}</span>
+                        <span className="text-[11px] text-[#664444] font-mono">{srv.duration}</span>
+                      </div>
+
+                      <div className="space-y-1.5 pt-2">
+                        <span className="text-[10px] font-bold uppercase text-[#664444] tracking-wider block">Deliverables:</span>
+                        <ul className="text-xs text-[#2b0808] space-y-1">
+                          {srv.deliverables.map((d, i) => (
+                            <li key={i} className="flex items-start gap-1.5">
+                              <span className="text-[#8b0101] font-bold">•</span>
+                              <span>{d}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-4 border-t border-[#8b0101]/20">
+                      <button
+                        onClick={() => handleOpenEditServiceModal(srv)}
+                        className="flex-1 py-2 px-3 rounded-xl bg-[#2b0808] hover:bg-[#8b0101] text-white font-syne font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <Edit3 className="w-3.5 h-3.5 text-[#e7d9d1]" />
+                        Edit Package
+                      </button>
+
+                      <button
+                        onClick={() => handleDeleteService(srv.id)}
+                        className="p-2 rounded-xl bg-[#e7d9d1] hover:bg-[#8b0101]/10 text-[#8b0101]"
+                        title="Delete Package"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -812,6 +1133,322 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 className="w-full py-3.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-lg shadow-[#8b0101]/30 transition-transform active:scale-98"
               >
                 Publish to Portfolio Website
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* CREATE NEW PROOFING ALBUM MODAL */}
+      {showAddAlbumModal && (
+        <div className="fixed inset-0 z-50 bg-[#2b0808]/80 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+          <div className="relative w-full max-w-lg bg-[#2b0808] border border-[#8b0101]/40 rounded-3xl p-8 shadow-2xl my-8 text-[#e7d9d1]">
+            <button onClick={() => setShowAddAlbumModal(false)} className="absolute top-4 right-4 p-2 text-[#e7d9d1]/70 hover:text-white rounded-full bg-[#180404] border border-[#8b0101]/40">
+              <X className="w-5 h-5" />
+            </button>
+
+            <h3 className="font-syne font-bold text-2xl text-white mb-1">Create Client Proofing Album</h3>
+            <p className="text-[#e7d9d1]/70 text-xs mb-6">Create a private, passcode-protected album for client photo selection.</p>
+
+            <form onSubmit={handleCreateAlbum} className="space-y-4">
+              <div>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Album Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Rohit & Neha Royal Wedding"
+                  value={newAlbum.albumTitle || ''}
+                  onChange={(e) => setNewAlbum({ ...newAlbum, albumTitle: e.target.value })}
+                  className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#e7d9d1]/40 font-syne font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Client Name *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Rohit & Neha"
+                  value={newAlbum.clientName || ''}
+                  onChange={(e) => setNewAlbum({ ...newAlbum, clientName: e.target.value })}
+                  className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#e7d9d1]/40"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Passcode / PIN *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. SWAROOP2026"
+                    value={newAlbum.passcode || ''}
+                    onChange={(e) => setNewAlbum({ ...newAlbum, passcode: e.target.value })}
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white font-mono tracking-widest"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Event Date</label>
+                  <input
+                    type="date"
+                    value={newAlbum.eventDate || ''}
+                    onChange={(e) => setNewAlbum({ ...newAlbum, eventDate: e.target.value })}
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Cover Image (Upload file or URL)</label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAlbumCoverUpload}
+                    className="text-xs text-[#e7d9d1]/80 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#8b0101] file:text-white"
+                  />
+                  <input
+                    type="text"
+                    placeholder="OR paste Image Cover URL"
+                    value={newAlbum.coverUrl || ''}
+                    onChange={(e) => setNewAlbum({ ...newAlbum, coverUrl: e.target.value })}
+                    className="flex-1 bg-[#180404] border border-[#8b0101]/40 rounded-xl px-3 py-2 text-xs text-white placeholder-[#e7d9d1]/40"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-lg shadow-[#8b0101]/30 transition-transform active:scale-98"
+              >
+                Create Proofing Album
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MANAGE & UPLOAD ALBUM PHOTOS MODAL */}
+      {activeAlbumPhotosModal && (
+        <div className="fixed inset-0 z-50 bg-[#2b0808]/80 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+          <div className="relative w-full max-w-4xl bg-[#2b0808] border border-[#8b0101]/40 rounded-3xl p-8 shadow-2xl my-8 text-[#e7d9d1] space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setActiveAlbumPhotosModal(null)} className="absolute top-4 right-4 p-2 text-[#e7d9d1]/70 hover:text-white rounded-full bg-[#180404] border border-[#8b0101]/40">
+              <X className="w-5 h-5" />
+            </button>
+
+            <div>
+              <span className="px-2.5 py-0.5 rounded-full bg-[#8b0101] text-white text-[10px] font-bold uppercase tracking-wider">
+                Album Photos Manager
+              </span>
+              <h3 className="font-syne font-bold text-2xl text-white mt-1">{activeAlbumPhotosModal.albumTitle}</h3>
+              <p className="text-[#e7d9d1]/70 text-xs">Client: {activeAlbumPhotosModal.clientName} • Passcode: <strong className="text-[#8b0101] font-mono">{activeAlbumPhotosModal.passcode}</strong></p>
+            </div>
+
+            {/* Add Photo Form inside Album */}
+            <form onSubmit={handleAddPhotoToAlbum} className="p-4 bg-[#180404] rounded-2xl border border-[#8b0101]/40 space-y-3">
+              <h4 className="font-syne font-bold text-sm text-white flex items-center gap-2">
+                <Upload className="w-4 h-4 text-[#8b0101]" />
+                Upload New Photo to Album
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="text-[10px] text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Upload Photo File or Image URL *</label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleAlbumPhotoUpload}
+                      className="text-xs text-[#e7d9d1]/80 file:mr-2 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:bg-[#8b0101] file:text-white"
+                    />
+                    <input
+                      type="text"
+                      placeholder="OR paste Image URL"
+                      value={newAlbumPhotoUrl}
+                      onChange={(e) => setNewAlbumPhotoUrl(e.target.value)}
+                      className="flex-1 bg-[#2b0808] border border-[#8b0101]/40 rounded-xl px-3 py-1.5 text-xs text-white placeholder-[#e7d9d1]/40"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Photo Title / Label (Optional)</label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      placeholder="e.g. Ceremony Exchange #1"
+                      value={newAlbumPhotoTitle}
+                      onChange={(e) => setNewAlbumPhotoTitle(e.target.value)}
+                      className="flex-1 bg-[#2b0808] border border-[#8b0101]/40 rounded-xl px-3 py-1.5 text-xs text-white placeholder-[#e7d9d1]/40"
+                    />
+                    <button
+                      type="submit"
+                      className="py-1.5 px-4 rounded-xl font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shrink-0"
+                    >
+                      + Add Photo
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {newAlbumPhotoUrl && (
+                <div className="h-24 rounded-xl overflow-hidden bg-[#2b0808] border border-[#8b0101]/40 max-w-xs">
+                  <img src={newAlbumPhotoUrl} alt="Preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </form>
+
+            {/* Photos List Grid */}
+            <div className="space-y-3">
+              <h4 className="font-syne font-bold text-sm text-white">Album Photos ({activeAlbumPhotosModal.photos.length})</h4>
+              
+              {activeAlbumPhotosModal.photos.length === 0 ? (
+                <div className="p-8 text-center text-xs text-[#e7d9d1]/60 bg-[#180404] rounded-2xl border border-[#8b0101]/20">
+                  No photos uploaded to this album yet. Use the form above to add photos for your client!
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                  {activeAlbumPhotosModal.photos.map((photo) => (
+                    <div key={photo.id} className="relative group bg-[#180404] rounded-xl overflow-hidden border border-[#8b0101]/30">
+                      <div className="aspect-square bg-black">
+                        <img src={photo.url} alt={photo.title} className="w-full h-full object-cover" />
+                      </div>
+                      
+                      {photo.isSelected && (
+                        <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-[#8b0101] text-white text-[9px] font-bold uppercase flex items-center gap-1 shadow-md">
+                          <Check className="w-3 h-3 stroke-[3]" />
+                          Selected
+                        </div>
+                      )}
+
+                      <button
+                        onClick={() => handleDeletePhotoFromAlbum(activeAlbumPhotosModal.id, photo.id)}
+                        className="absolute top-2 right-2 p-1.5 rounded-full bg-black/80 text-red-400 hover:bg-red-600 hover:text-white transition-colors"
+                        title="Delete photo"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+
+                      <div className="p-2 text-center text-[10px] text-[#e7d9d1] font-medium truncate">
+                        {photo.title}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* ADD / EDIT SERVICE PACKAGE MODAL */}
+      {showServiceModal && (
+        <div className="fixed inset-0 z-50 bg-[#2b0808]/80 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto animate-fadeIn">
+          <div className="relative w-full max-w-xl bg-[#2b0808] border border-[#8b0101]/40 rounded-3xl p-8 shadow-2xl my-8 text-[#e7d9d1]">
+            <button onClick={() => setShowServiceModal(false)} className="absolute top-4 right-4 p-2 text-[#e7d9d1]/70 hover:text-white rounded-full bg-[#180404] border border-[#8b0101]/40">
+              <X className="w-5 h-5" />
+            </button>
+
+            <h3 className="font-syne font-bold text-2xl text-white mb-1">
+              {editingService ? 'Edit Service Package' : 'Add New Service Package'}
+            </h3>
+            <p className="text-[#e7d9d1]/70 text-xs mb-6">Customize pricing, deliverables, and package details shown on your portfolio.</p>
+
+            <form onSubmit={handleSaveService} className="space-y-4">
+              <div>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Package Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Wedding One Day Service"
+                  value={serviceForm.title}
+                  onChange={(e) => setServiceForm({ ...serviceForm, title: e.target.value })}
+                  className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#e7d9d1]/40 font-syne font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Package Subtitle / Short Description</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Complete single-day coverage for traditional wedding & reception"
+                  value={serviceForm.subtitle}
+                  onChange={(e) => setServiceForm({ ...serviceForm, subtitle: e.target.value })}
+                  className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white placeholder-[#e7d9d1]/40"
+                />
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Category</label>
+                  <select
+                    value={serviceForm.category}
+                    onChange={(e) => setServiceForm({ ...serviceForm, category: e.target.value as any })}
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-3 py-2 text-xs text-white"
+                  >
+                    <option value="photography">Photography</option>
+                    <option value="videography">Videography</option>
+                    <option value="hybrid">Hybrid / Both</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Price *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. ₹64,999/-"
+                    value={serviceForm.price}
+                    onChange={(e) => setServiceForm({ ...serviceForm, price: e.target.value })}
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-3 py-2 text-xs text-white font-syne font-bold placeholder-[#e7d9d1]/40"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">Duration</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Full Day"
+                    value={serviceForm.duration}
+                    onChange={(e) => setServiceForm({ ...serviceForm, duration: e.target.value })}
+                    className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-3 py-2 text-xs text-white placeholder-[#e7d9d1]/40"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs text-[#e7d9d1]/80 font-semibold uppercase block mb-1">
+                  Deliverables (Enter 1 item per line)
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="200 Photos Printed Album&#10;100 Edited High-Res Photos&#10;6 to 8 Min Cinematic Feature Film & Teaser&#10;1 Hr+ Traditional Ceremony Video"
+                  value={serviceForm.deliverablesText}
+                  onChange={(e) => setServiceForm({ ...serviceForm, deliverablesText: e.target.value })}
+                  className="w-full bg-[#180404] border border-[#8b0101]/40 rounded-xl px-4 py-2 text-xs text-white font-mono placeholder-[#e7d9d1]/40"
+                />
+              </div>
+
+              <div className="flex items-center gap-2 pt-2">
+                <input
+                  type="checkbox"
+                  id="popularCheck"
+                  checked={serviceForm.popular}
+                  onChange={(e) => setServiceForm({ ...serviceForm, popular: e.target.checked })}
+                  className="w-4 h-4 accent-[#8b0101] rounded"
+                />
+                <label htmlFor="popularCheck" className="text-xs text-[#e7d9d1] font-medium cursor-pointer">
+                  Highlight as "Most Popular Package"
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-full font-syne font-bold text-xs uppercase tracking-wider text-white crimson-gradient-bg hover:brightness-110 shadow-lg shadow-[#8b0101]/30 transition-transform active:scale-98 mt-4"
+              >
+                {editingService ? 'Save Package Changes' : 'Create Pricing Package'}
               </button>
             </form>
           </div>
