@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({ settings }) => {
 
         {/* Main Hero Title */}
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-syne font-extrabold text-[#2b0808] tracking-tight leading-tight max-w-4xl mx-auto mb-6 uppercase">
-          <span className="block sm:inline">SWAROOPNAIK</span>{' '}
+          <span className="block sm:inline">SWAROOP NAIK</span>{' '}
           <span className="gold-gradient-text block sm:inline">FILMS</span>
         </h1>
 

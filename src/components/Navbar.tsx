@@ -48,16 +48,13 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo & Brand Name */}
-          <a href="#" className="flex items-center gap-2.5 group">
+          {/* Logo Only */}
+          <a href="#" className="flex items-center group">
             <img 
               src="/logo.png" 
               alt={settings.brandName} 
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(139,1,1,0.25)]" 
             />
-            <span className="font-syne font-extrabold text-lg sm:text-xl text-[#2b0808] tracking-tight group-hover:text-[#8b0101] transition-colors">
-              SWAROOPNAIKFILMS
-            </span>
           </a>
 
           {/* Desktop Navigation */}
